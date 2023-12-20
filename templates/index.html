@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block main %}
+<!-- FORM TO GET ORIGINAL URL -->
+<style>
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .input-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .input-container input {
+        flex: 1;
+        /* Allows the input to expand and take available space */
+    }
+
+    .input-container button {
+        margin-left: 5px;
+        /* Adjust margin as needed */
+    }
+</style>
+<div class="center">
+    <div class="container mt-3">
+        <h1 class="display-2">URL SHORTNER</h1>
+        <form action="/" method="post">
+            <div class="mb-3 mt-3">
+                <label for="url">URL:</label>
+                <input type="text" class="form-control" id="email" placeholder="Enter url" name="original_url"
+                    id="original_url" value="{{ original_url }}">
+            </div>
+            <div class="mb-3">
+                <label for="pwd">Shortend URL:</label>
+                <div class="col-sm-3 input-container">
+                    <input type="text" class="form-control" value="{{ shorten_url }}" name="shorten_url"
+                        id="shorten_url" readonly>
+                    <button onclick="copyText()" type="button" class="btn btn-light">COPY</button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate</button>
+
+            <!-- SCRIPT -->
+            <script>
+                // To give the copy button
+                function copyText() {
+                    const textToCopy = document.getElementById('shorten_url');
+                    const inputValue = textToCopy.value.trim(); // Get the input value and remove leading/trailing spaces
+
+                    if (inputValue !== 'Shorten Url') {
+                        textToCopy.select();
+                        document.execCommand('copy');
+                        alert('URL Copied!');
+                    } else {
+                        alert('Nothing to copy. Generate url first!');
+                    }
+                }
+
+            </script>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
